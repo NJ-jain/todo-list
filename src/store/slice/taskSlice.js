@@ -35,9 +35,13 @@ export const taskSlice = createSlice({
       const taskId = action.payload;
       state.taskList[taskId].important = !state.taskList[taskId].important;
     },
+    setSelectedTaskId: (state, action) => {
+      state.taskId = action.payload;
+    },
+
   },
 });
 
-export const { toggle, addTask, deleteTask, toggleTaskCompletion, toggleTaskImpportant,taskInputBox } = taskSlice.actions;
+export const { toggle, addTask, deleteTask, toggleTaskCompletion, toggleTaskImpportant,taskInputBox, setSelectedTaskId } = taskSlice.actions;
 
 export default taskSlice.reducer;

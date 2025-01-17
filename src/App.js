@@ -2,13 +2,13 @@ import { useSelector } from 'react-redux';
 import './App.css';
 import Aside from './component/aside';
 import Navbar from './component/navbar';
-import NewTask from './component/newTask';
 import TaskList from './component/taskList';
 import { useEffect } from 'react';
+import TaskSlider from './component/newTask';
 
 function App() {
 
-  const showNewTask = useSelector((state) => state.task.isOpen);
+  const showTaskSlider = useSelector((state) => state.task.isOpen);
   const showAside = useSelector((state) => state.aside.isOpen); // Get the isOpen state from Redux
 
 
@@ -25,10 +25,10 @@ function App() {
   return (
     <div className="App flex flex-col min-h-screen px-4 dark:bg-[#242424]">
       <Navbar />
-      <div className={`flex w-full ${showNewTask && showAside ? "gap-4" : showNewTask || showAside ? "gap-8" : ""} `}>
+      <div className={`flex w-full ${showTaskSlider && showAside ? "gap-4" : showTaskSlider || showAside ? "gap-8" : ""} `}>
         <Aside />
         <TaskList />
-        <NewTask />
+        <TaskSlider />
       </div>
     </div>
   );

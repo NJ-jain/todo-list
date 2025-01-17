@@ -1,15 +1,17 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-const NewTask = () => {
+const TaskSlider = () => {
   const isOpen = useSelector((state) => state.task.isOpen);
 
   if (!isOpen) return null;
 
   return (
-    <div className='w-1/5 bg-red-300'>NewTask</div>
+    <div className='w-1/5 bg-[#EEF6EF]'>
+      
+    </div>
   );
 };
 
 
-export default NewTask
+export default TaskSlider
