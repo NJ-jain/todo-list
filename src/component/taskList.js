@@ -28,7 +28,6 @@ const TaskList = () => {
         dispatch(taskInputBox());
     }
     const handleSelectedTaskId = (taskId) => {
-        debugger
         dispatch(setSelectedTaskId(taskId)); // Dispatch the action to toggle task completion
         if(!showTaskSlider) dispatch(toggle())
     };

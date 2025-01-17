@@ -26,9 +26,9 @@ const TaskSlider = () => {
 
   return (
     <div className='w-1/5 bg-[#EEF6EF] flex flex-col p-4 h-screen  '>
-      <div className='flex flex-col'>
+      <div className='flex flex-col' key={task.id} >
 
-        <div key={task.id} className="task-item flex justify-between items-center p-5 border-t border-b border-[#496E4B33]" >
+        <div className="task-item flex justify-between items-center p-5 border-t border-b border-[#496E4B33]" >
           <div className='flex gap-2'>
             <span className='taskCheckBox' onClick={() => handleToggleTaskCompletion(task.id)}> 
               {task.completed ? <SquareCheckBig /> : <Square />}
@@ -41,7 +41,7 @@ const TaskSlider = () => {
           </span>
           {/* <span className="task-priority">{task.priority}</span> */}
         </div>
-        <div key={task.id} className="task-item flex justify-between items-center p-5 border-t border-b border-[#496E4B33]" >
+        <div  className="task-item flex justify-between items-center p-5 border-t border-b border-[#496E4B33]" >
           <div className='flex gap-2'>
             <span className='taskCheckBox'> 
               <Plus />
@@ -50,7 +50,7 @@ const TaskSlider = () => {
           </div>
 
         </div>
-        <div key={task.id} className="task-item flex justify-between items-center p-5 border-t border-b border-[#496E4B33]" >
+        <div  className="task-item flex justify-between items-center p-5 border-t border-b border-[#496E4B33]" >
           <div className='flex gap-2'>
             <span className='taskCheckBox'> 
               <Bell />
@@ -59,7 +59,7 @@ const TaskSlider = () => {
           </div>
 
         </div>
-        <div key={task.id} className="task-item flex justify-between items-center p-5 border-t border-b border-[#496E4B33]" >
+        <div  className="task-item flex justify-between items-center p-5 border-t border-b border-[#496E4B33]" >
           <div className='flex gap-2'>
             <span className='taskCheckBox'> 
               <Calendar />
@@ -68,7 +68,7 @@ const TaskSlider = () => {
           </div>
 
         </div>
-        <div key={task.id} className="task-item flex justify-between items-center p-5 border-t border-b border-[#496E4B33]" >
+        <div  className="task-item flex justify-between items-center p-5 border-t border-b border-[#496E4B33]" >
           <div className='flex gap-2'>
             <span className='taskCheckBox'> 
               <Repeat />
@@ -80,7 +80,7 @@ const TaskSlider = () => {
       </div>
       <div className='mt-auto'>
 
-        <div key={task.id} className="task-item flex justify-between items-center p-5 border-t border-b border-[#496E4B33]" >
+        <div className="task-item flex justify-between items-center p-5 border-t border-b border-[#496E4B33]" >
           <span className='taskCheckBox' onClick={handleClose}> 
             <X />
           </span>
