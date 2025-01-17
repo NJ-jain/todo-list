@@ -1,7 +1,7 @@
 import { Bell, Calendar, CircleChevronDown, CircleChevronUp, Repeat, Square, SquareCheckBig, Star, StarOff } from 'lucide-react';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTask, taskInputBox, toggleTaskCompletion, toggleTaskImpportant,setSelectedTaskId } from '../store/slice/taskSlice';
+import { addTask, taskInputBox, toggleTaskCompletion, toggleTaskImpportant,setSelectedTaskId, toggle } from '../store/slice/taskSlice';
 
 const TaskList = () => {
 
@@ -44,21 +44,21 @@ const TaskList = () => {
 
             {taskInput && <div className='w-full bg-gradient-to-b from-[rgba(53,121,55,0.1)] to-[rgba(208,255,210,0.1)] h-64 flex flex-col justify-between'>
                 <textarea
-                    className='w-full bg-transparent text-[#142E159E] outline-none p-2'
+                    className='w-full bg-transparent text-[#142E159E] outline-none p-2 dark:text-white'
                     rows={9}
                     value={TaskSliderText}
                     onChange={(e) => setTaskSliderText(e.target.value)}
                     placeholder='Add a Task'
                 />
 
-                <div className='flex justify-between p-3 mt-auto'>
+                <div className='flex justify-between p-3 mt-auto '>
                     <div className='flex gap-4'>
-                        <Bell color='#142E159E' />
-                        <Repeat color='#142E159E' />
-                        <Calendar color='#142E159E' />
+                        <Bell  className='dark:text-white text-[#142E159E]'/>
+                        <Repeat className='dark:text-white text-[#142E159E]' />
+                        <Calendar className='dark:text-white text-[#142E159E]' />
                     </div>
                     {/* <button className='bg-[#35793729] text-[#357937] p-2 rounded-md' onClick={() => dispatch(toggle())}>ADD TASK</button> */}
-                    <button className='bg-[#35793729] text-[#357937] p-2 rounded-md' onClick={handleAddTask}>ADD TASK</button>
+                    <button className=' text-[#357937] bg-[#35793729] p-2 rounded-md dark:bg-[#347237] dark:text-white ' onClick={handleAddTask}>ADD TASK</button>
                 </div>
             </div>}
 
@@ -66,31 +66,31 @@ const TaskList = () => {
                 {Object.values(tasks).filter(task => !task.completed).map((task) => (
                     <li key={task.id} className="task-item flex justify-between items-center p-5 border border-[#496E4B33]" onClick={() => handleSelectedTaskId(task.id)}>
                         <div className='flex gap-2'>
-                            <span className='taskCheckBox' onClick={() => handleToggleTaskCompletion(task.id)}> {/* Add onClick handler */}
+                            <span className='taskCheckBox dark:text-white' onClick={() => handleToggleTaskCompletion(task.id)}> {/* Add onClick handler */}
                                 {task.completed ? <SquareCheckBig /> : <Square />}
                             </span>
-                            <span className="task-text">{task.text}</span>
+                            <span className="task-text dark:text-white">{task.text}</span>
                         </div>
 
-                        <span className='taskCheckBox' onClick={() => handleToggleTaskImportant(task.id)}> {/* Add onClick handler */}
+                        <span className='taskCheckBox dark:text-white' onClick={() => handleToggleTaskImportant(task.id)}> {/* Add onClick handler */}
                             {task.important ? <Star /> : <StarOff />}
                         </span>
                         {/* <span className="task-priority">{task.priority}</span> */}
                     </li>
                 ))}
             </ul>
-            <p className='w-fit'>Completed</p>
+            <p className='w-fit dark:text-white'>Completed</p>
             <ul className="task-list">
                 {Object.values(tasks).filter(task => task.completed).map((task) => (
                     <li key={task.id} className="task-item flex justify-between items-center p-5 border border-[#496E4B33]" onClick={() => handleSelectedTaskId(task.id)}>
-                        <div className='flex gap-2'>
-                            <span className='taskCheckBox' onClick={() => handleToggleTaskCompletion(task.id)}> {/* Add onClick handler */}
+                        <div className='flex gap-2 '>
+                            <span className='taskCheckBox dark:text-white ' onClick={() => handleToggleTaskCompletion(task.id)}> {/* Add onClick handler */}
                                 {task.completed ? <SquareCheckBig /> : <Square />}
                             </span>
-                            <span className="task-text">{task.text}</span>
+                            <span className="task-text dark:text-white">{task.text}</span>
                         </div>
 
-                        <span className='taskCheckBox' onClick={() => handleToggleTaskImportant(task.id)}> {/* Add onClick handler */}
+                        <span className='taskCheckBox dark:text-white' onClick={() => handleToggleTaskImportant(task.id)}> {/* Add onClick handler */}
                             {task.important ? <Star /> : <StarOff />}
                         </span>
                         {/* <span className="task-priority">{task.priority}</span> */}
