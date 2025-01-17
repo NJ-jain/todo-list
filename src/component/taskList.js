@@ -94,7 +94,7 @@ const TaskList = () => {
 
                             <span className='taskCheckBox dark:text-white' onClick={(e) => handleToggleTaskImportant(e, task.id)}> {/* Add onClick handler */}
                                 {task.important ? <Star /> : <StarOff />}
-                            </span>
+S                            </span>
                             {/* <span className="task-priority">{task.priority}</span> */}
                         </li>
                     ))}

@@ -25,55 +25,55 @@ const TaskSlider = () => {
   }
 
   return (
-    <div className='w-1/5 flex-1  bg-[#EEF6EF] flex flex-col p-4   '>
+    <div className='w-1/5 flex-1  bg-[#EEF6EF] flex flex-col p-4 h-screen dark:bg-[#2c2c2c]  '>
       <div className='flex flex-col' key={task.id} >
 
         <div className="task-item flex justify-between items-center p-5 border-t border-b border-[#496E4B33]" >
-          <div className='flex gap-2'>
-            <span className='taskCheckBox' onClick={() => handleToggleTaskCompletion(task.id)}> 
+          <div className='flex gap-2 '>
+            <span className='taskCheckBox dark:text-white' onClick={() => handleToggleTaskCompletion(task.id)}> 
               {task.completed ? <SquareCheckBig /> : <Square />}
             </span>
-            <span className="task-text">{task.text}</span>
+            <span className="task-text dark:text-white">{task.text}</span>
           </div>
 
-          <span className='taskCheckBox' onClick={() => handleToggleTaskImportant(task.id)}> 
+          <span className='taskCheckBox dark:text-white' onClick={() => handleToggleTaskImportant(task.id)}> 
             {task.important ? <Star /> : <StarOff />}
           </span>
           {/* <span className="task-priority">{task.priority}</span> */}
         </div>
         <div  className="task-item flex justify-between items-center p-5 border-t border-b border-[#496E4B33]" >
           <div className='flex gap-2'>
-            <span className='taskCheckBox'> 
+            <span className='taskCheckBox dark:text-white'> 
               <Plus />
             </span>
-            <span className="task-text">Add Step</span>
+            <span className="task-text dark:text-white">Add Step</span>
           </div>
 
         </div>
         <div  className="task-item flex justify-between items-center p-5 border-t border-b border-[#496E4B33]" >
           <div className='flex gap-2'>
-            <span className='taskCheckBox'> 
+            <span className='taskCheckBox dark:text-white'> 
               <Bell />
             </span>
-            <span className="task-text">Set Reminder</span>
+            <span className="task-text dark:text-white">Set Reminder</span>
           </div>
 
         </div>
         <div  className="task-item flex justify-between items-center p-5 border-t border-b border-[#496E4B33]" >
           <div className='flex gap-2'>
-            <span className='taskCheckBox'> 
+            <span className='taskCheckBox dark:text-white'> 
               <Calendar />
             </span>
-            <span className="task-text">Add Due Date</span>
+            <span className="task-text dark:text-white">Add Due Date</span>
           </div>
 
         </div>
         <div  className="task-item flex justify-between items-center p-5 border-t border-b border-[#496E4B33]" >
           <div className='flex gap-2'>
-            <span className='taskCheckBox'> 
+            <span className='taskCheckBox dark:text-white'> 
               <Repeat />
             </span>
-            <span className="task-text">Add Due Date</span>
+            <span className="task-text dark:text-white">Add Due Date</span>
           </div>
 
         </div>
@@ -81,11 +81,11 @@ const TaskSlider = () => {
       <div className='mt-auto'>
 
         <div className="task-item flex justify-between items-center p-5 border-t border-b border-[#496E4B33]" >
-          <span className='taskCheckBox' onClick={handleClose}> 
+          <span className='taskCheckBox dark:text-white' onClick={handleClose}> 
             <X />
           </span>
-          <span className="task-text">Created Today</span>
-          <span className='taskCheckBox' onClick={() => handleTaskDelete(task.id)}> 
+          <span className="task-text dark:text-white">Created Today</span>
+          <span className='taskCheckBox dark:text-white' onClick={() => handleTaskDelete(task.id)}> 
             <Trash2 />
           </span>
         </div>
