@@ -78,7 +78,7 @@ const TaskList = () => {
                 </div>
             </div>}
 
-            <ul className="task-list">
+            <ul className="task-list ">
                 {filteredTasks.filter(task => !task.completed).map((task) => (
                     <li key={task.id} className="task-item flex justify-between items-center p-5 border border-[#496E4B33]" onClick={() => handleSelectedTaskId(task.id)}>
                         <div className='flex gap-2'>
@@ -94,7 +94,10 @@ const TaskList = () => {
                         {/* <span className="task-priority">{task.priority}</span> */}
                     </li>
                 ))}
+
             </ul>
+           
+
             <p className='w-fit dark:text-white'>Completed</p>
             <ul className="task-list">
                 {filteredTasks.filter(task => task.completed).map((task) => (

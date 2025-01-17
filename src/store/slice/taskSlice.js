@@ -5,7 +5,8 @@ export const taskSlice = createSlice({
   initialState: {
     isOpen: false,
     taskList: {},
-    isTaskInputBoxOpen:true
+    isTaskInputBoxOpen:true,
+    filter:"all"
   },
   reducers: {
     toggle: (state) => {
