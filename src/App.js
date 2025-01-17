@@ -23,7 +23,7 @@ function App() {
   }, [darkMode]);
 
   return (
-    <div className="App flex flex-col h-screen px-4 dark:bg-[#242424]">
+    <div className="App flex flex-col min-h-screen px-4 dark:bg-[#242424]">
       <Navbar />
       <div className={`flex w-full ${showNewTask && showAside ? "gap-4" : showNewTask || showAside ? "gap-8" : ""} `}>
         <Aside />

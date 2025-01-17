@@ -4,11 +4,15 @@ export const taskSlice = createSlice({
   name: 'task',
   initialState: {
     isOpen: false,
-    taskList: {}
+    taskList: {},
+    isTaskInputBoxOpen:true
   },
   reducers: {
     toggle: (state) => {
       state.isOpen = !state.isOpen;
+    },
+    taskInputBox:(state)=>{
+       state.isTaskInputBoxOpen = !state.isTaskInputBoxOpen;
     },
     addTask: (state, action) => {
       const taskId = Date.now(); // Generate a unique ID for the new task
@@ -34,6 +38,6 @@ export const taskSlice = createSlice({
   },
 });
 
-export const { toggle, addTask, deleteTask, toggleTaskCompletion, toggleTaskImpportant } = taskSlice.actions;
+export const { toggle, addTask, deleteTask, toggleTaskCompletion, toggleTaskImpportant,taskInputBox } = taskSlice.actions;
 
 export default taskSlice.reducer;
