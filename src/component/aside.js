@@ -15,44 +15,44 @@ const Aside = () => {
     const isOpen = useSelector((state) => state.aside.isOpen); // Get the isOpen state from Redux
     if (!isOpen) return null;
     return (
-        <div className='w-1/5 bg-[#EEF6EF] flex-1 p-4 relative mt-28 pt-24'>
+        <div className='w-1/5 bg-[#EEF6EF] flex-1 p-4 relative mt-28 pt-24 dark:bg-[#2C2C2C] dark:text-white'>
             <div className='w-full flex flex-col items-center gap-2 -top-16 absolute justify-center'>
                 <ProfileImage />
                 <p>Hey, ABCD</p>
             </div>
 
             <div className='flex flex-col gap-4 p-4 '>
-                <ul className='flex flex-col bg-white gap-2 py-2'>
-                    <li className='flex items-center space-x-2  p-2 hover:bg-[#35793729] hover:rounded-lg hover:text-green-900'> {/* Add flexbox styling */}
+                <ul className='flex flex-col bg-white gap-2 py-2 dark:bg-[#232323]'>
+                    <li className='flex items-center dark:bg-transparent space-x-2  p-2 hover:bg-[#35793729] hover:rounded-lg hover:text-green-900 dark:hover:bg-[#35793729] dark:hover:text-[#98E19B]'> {/* Add flexbox styling */}
                         <SquareMenu /> {/* Icon */}
                         <span>All Tasks</span> {/* Name next to the icon */}
                     </li>
-                    <li className='flex items-center space-x-2 bg-white p-2 hover:bg-[#35793729] hover:rounded-lg hover:text-green-900'> {/* Add flexbox styling */}
+                    <li className='flex items-center space-x-2 dark:bg-transparent bg-white p-2 hover:bg-[#35793729] hover:rounded-lg hover:text-green-900 dark:hover:bg-[#35793729] dark:hover:text-[#98E19B]'> {/* Add flexbox styling */}
                         <Calendar /> {/* Icon */}
                         <span>Today</span> {/* Name next to the icon */}
                     </li>
-                    <li className='flex items-center space-x-2 bg-white p-2 hover:bg-[#35793729] hover:rounded-lg hover:text-green-900'> {/* Add flexbox styling */}
+                    <li className='flex items-center dark:bg-transparent space-x-2 bg-white p-2 hover:bg-[#35793729] hover:rounded-lg hover:text-green-900 dark:hover:bg-[#35793729] dark:hover:text-[#98E19B]'> {/* Add flexbox styling */}
                         <Star /> {/* Icon */}
                         <span>Important</span> {/* Name next to the icon */}
                     </li>
-                    <li className='flex items-center space-x-2 bg-white p-2 hover:bg-[#35793729] hover:rounded-lg hover:text-green-900'> {/* Add flexbox styling */}
+                    <li className='flex items-center dark:bg-transparent space-x-2 bg-white p-2 hover:bg-[#35793729] hover:rounded-lg hover:text-green-900 dark:hover:bg-[#35793729] dark:hover:text-[#98E19B]'> {/* Add flexbox styling */}
                         <Route />{/* Icon */}
                         <span>Planned</span> {/* Name next to the icon */}
                     </li>
-                    <li className='flex items-center space-x-2 bg-white p-2 hover:bg-[#35793729] hover:rounded-lg hover:text-green-900'> {/* Add flexbox styling */}
+                    <li className='flex items-center dark:bg-transparent space-x-2 bg-white p-2 hover:bg-[#35793729] hover:rounded-lg hover:text-green-900 dark:hover:bg-[#35793729] dark:hover:text-[#98E19B]'> {/* Add flexbox styling */}
                         <School />{/* Icon */}
                         <span>Assigned to me </span> {/* Name next to the icon */}
                     </li>
                 </ul>
 
-                <ul className='flex flex-col bg-white gap-2 py-2'>
-                    <li className='flex items-center space-x-2  p-2 hover:bg-[#35793729] hover:rounded-lg hover:text-green-900'> {/* Add flexbox styling */}
+                <ul className='flex flex-col bg-white gap-2 py-2 dark:bg-[#232323]'>
+                    <li className='flex items-center dark:bg-transparent space-x-2 bg-white p-2 hover:bg-[#35793729] hover:rounded-lg hover:text-green-900 dark:hover:bg-[#35793729] dark:hover:text-[#98E19B]'>
                         <Plus /> {/* Icon */}
                         <span>Add list</span> {/* Name next to the icon */}
                     </li>
 
                 </ul>
-                <ul className='flex flex-col bg-white gap-2 py-2'>
+                <ul className='flex flex-col bg-white gap-2 py-2 dark:bg-[#232323]'>
                     <li className='flex items-center space-x-2  p-2 justify-between '> {/* Add flexbox styling */}
                         <span>Today Tasks</span> {/* Name next to the icon */}
                         < Info />

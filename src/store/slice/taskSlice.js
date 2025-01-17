@@ -17,16 +17,23 @@ export const taskSlice = createSlice({
         text: action.payload.text,
         priority: action.payload.priority,
         important: false,
-        completed : false,
+        completed: false,
       };
     },
     deleteTask: (state, action) => {
-      // state.tasks = state.tasks.filter(task => task.id !== action.payload);
       delete state.taskList[action.payload];
+    },
+    toggleTaskCompletion: (state, action) => {
+      const taskId = action.payload;
+      state.taskList[taskId].completed = !state.taskList[taskId].completed;
+    },
+    toggleTaskImpportant: (state, action) => {
+      const taskId = action.payload;
+      state.taskList[taskId].important = !state.taskList[taskId].important;
     },
   },
 });
 
-export const { toggle, addTask, deleteTask } = taskSlice.actions;
+export const { toggle, addTask, deleteTask, toggleTaskCompletion, toggleTaskImpportant } = taskSlice.actions;
 
 export default taskSlice.reducer;

@@ -1,7 +1,7 @@
-import { Bell, Calendar, CircleChevronDown, Repeat, Square, SquareCheckBig, Star } from 'lucide-react';
+import { Bell, Calendar, CircleChevronDown, Repeat, Square, SquareCheckBig, Star, StarOff } from 'lucide-react';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTask } from '../store/slice/taskSlice';
+import { addTask, toggleTaskCompletion, toggleTaskImpportant } from '../store/slice/taskSlice';
 
 const TaskList = () => {
 
@@ -15,6 +15,13 @@ const TaskList = () => {
             dispatch(addTask({ text: newTaskText, priority: 'Normal' })); // Assuming default priority is 'Normal'
             setNewTaskText(''); // Clear the textarea after adding the task
         }
+    };
+
+    const handleToggleTaskCompletion = (taskId) => {
+        dispatch(toggleTaskCompletion(taskId)); // Dispatch the action to toggle task completion
+    };
+    const handleToggleTaskImportant = (taskId) => {
+        dispatch(toggleTaskImpportant(taskId)); // Dispatch the action to toggle task completion
     };
 
     const dispatch = useDispatch();
@@ -33,6 +40,7 @@ const TaskList = () => {
                     rows={9}
                     value={newTaskText}
                     onChange={(e) => setNewTaskText(e.target.value)}
+                    placeholder='Add a Task'
                 />
 
                 <div className='flex justify-between p-3 mt-auto'>
@@ -50,10 +58,15 @@ const TaskList = () => {
                 {Object.values(tasks).map((task) => (
                     <li key={task.id} className="task-item flex justify-between items-center p-5 border border-[#496E4B33]">
                         <div className='flex gap-2'>
+                        <span className='taskCheckBox' onClick={() => handleToggleTaskCompletion(task.id)}> {/* Add onClick handler */}
                             {task.completed ? <SquareCheckBig /> : <Square />}
+                        </span>
                             <span className="task-text">{task.text}</span>
                         </div>
-                        <Star />
+
+                        <span className='taskCheckBox' onClick={() => handleToggleTaskImportant(task.id)}> {/* Add onClick handler */}
+                            {task.important ? <Star /> :  <StarOff />}
+                        </span>
                         {/* <span className="task-priority">{task.priority}</span> */}
                     </li>
                 ))}
