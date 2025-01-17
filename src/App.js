@@ -25,7 +25,7 @@ function App() {
   return (
     <div className="App flex flex-col min-h-screen px-4 dark:bg-[#242424]">
       <Navbar />
-      <div className={`flex w-full ${showTaskSlider && showAside ? "gap-4" : showTaskSlider || showAside ? "gap-8" : ""} `}>
+      <div className={`flex flex-1 w-full ${showTaskSlider && showAside ? "gap-4" : showTaskSlider || showAside ? "gap-8" : ""} `}>
         <Aside />
         <TaskList />
         <TaskSlider />

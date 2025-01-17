@@ -10,6 +10,9 @@ const TaskList = () => {
     const [TaskSliderText, setTaskSliderText] = React.useState('');
     const tasks = useSelector((state) => state.task.taskList);
     const taskInput = useSelector((state) => state.task.isTaskInputBoxOpen);
+    const layoutValue = useSelector((state) => state.task.layout);
+
+
     console.log(taskInput);
     const handleAddTask = () => {
         if (TaskSliderText.trim() !== '') {
@@ -46,7 +49,7 @@ const TaskList = () => {
             return taskDate === today;
         }
     });
-    
+
 
     const dispatch = useDispatch();
     return (
@@ -78,41 +81,78 @@ const TaskList = () => {
                 </div>
             </div>}
 
-            <ul className="task-list">
-                {filteredTasks.filter(task => !task.completed).map((task) => (
-                    <li key={task.id} className="task-item flex justify-between items-center p-5 border border-[#496E4B33]" onClick={() => handleSelectedTaskId(task.id)}>
-                        <div className='flex gap-2'>
-                            <span className='taskCheckBox dark:text-white' onClick={(e) => handleToggleTaskCompletion(e, task.id)}> {/* Add onClick handler */}
-                                {task.completed ? <SquareCheckBig /> : <Square />}
-                            </span>
-                            <span className="task-text dark:text-white">{task.text}</span>
-                        </div>
+            {layoutValue === "list" ?
+                <ul className="task-list">
+                    {filteredTasks.filter(task => !task.completed).map((task) => (
+                        <li key={task.id} className="task-item flex justify-between items-center p-5 border border-[#496E4B33]" onClick={() => handleSelectedTaskId(task.id)}>
+                            <div className='flex gap-2'>
+                                <span className='taskCheckBox dark:text-white' onClick={(e) => handleToggleTaskCompletion(e, task.id)}> {/* Add onClick handler */}
+                                    {task.completed ? <SquareCheckBig /> : <Square />}
+                                </span>
+                                <span className="task-text dark:text-white">{task.text}</span>
+                            </div>
 
-                        <span className='taskCheckBox dark:text-white' onClick={(e) => handleToggleTaskImportant(e, task.id)}> {/* Add onClick handler */}
-                            {task.important ? <Star /> : <StarOff />}
-                        </span>
-                        {/* <span className="task-priority">{task.priority}</span> */}
-                    </li>
-                ))}
-            </ul>
-            <p className='w-fit dark:text-white'>Completed</p>
-            <ul className="task-list">
-                {filteredTasks.filter(task => task.completed).map((task) => (
-                    <li key={task.id} className="task-item flex justify-between items-center p-5 border border-[#496E4B33]" onClick={() => handleSelectedTaskId(task.id)}>
-                        <div className='flex gap-2 '>
-                            <span className='taskCheckBox dark:text-white ' onClick={(e) => handleToggleTaskCompletion(e, task.id)}> {/* Add onClick handler */}
-                                {task.completed ? <SquareCheckBig /> : <Square />}
+                            <span className='taskCheckBox dark:text-white' onClick={(e) => handleToggleTaskImportant(e, task.id)}> {/* Add onClick handler */}
+                                {task.important ? <Star /> : <StarOff />}
                             </span>
-                            <span className="task-text dark:text-white">{task.text}</span>
-                        </div>
+                            {/* <span className="task-priority">{task.priority}</span> */}
+                        </li>
+                    ))}
+                </ul>
+                :
+                <div className="task-list flex flex-wrap gap-4 ">
+                    {filteredTasks.filter(task => !task.completed).map((task) => (
+                        <div key={task.id} className="task-item w-1/4 py-16 flex justify-between items-center p-5 border border-[#496E4B33]" onClick={() => handleSelectedTaskId(task.id)}>
+                            <div className='flex gap-1'>
+                                <span className='taskCheckBox dark:text-white' onClick={(e) => handleToggleTaskCompletion(e, task.id)}> {/* Add onClick handler */}
+                                    {task.completed ? <SquareCheckBig /> : <Square />}
+                                </span>
+                                <span className="task-text dark:text-white">{task.text}</span>
+                            </div>
 
-                        <span className='taskCheckBox dark:text-white' onClick={(e) => handleToggleTaskImportant(e, task.id)}> {/* Add onClick handler */}
-                            {task.important ? <Star /> : <StarOff />}
-                        </span>
-                        {/* <span className="task-priority">{task.priority}</span> */}
-                    </li>
-                ))}
-            </ul>
+                            <span className='taskCheckBox dark:text-white' onClick={(e) => handleToggleTaskImportant(e, task.id)}> {/* Add onClick handler */}
+                                {task.important ? <Star /> : <StarOff />}
+                            </span>
+                        </div>
+                    ))}
+                </div>}
+            {filteredTasks.filter(task => task.completed).length !== 0 &&  <p className='w-fit dark:text-white'>Completed</p>}
+           
+            {layoutValue === "list" ?
+                <ul className="task-list">
+                    {filteredTasks.filter(task => task.completed).map((task) => (
+                        <li key={task.id} className="task-item flex justify-between items-center p-5 border border-[#496E4B33]" onClick={() => handleSelectedTaskId(task.id)}>
+                            <div className='flex gap-2'>
+                                <span className='taskCheckBox dark:text-white' onClick={(e) => handleToggleTaskCompletion(e, task.id)}> {/* Add onClick handler */}
+                                    {task.completed ? <SquareCheckBig /> : <Square />}
+                                </span>
+                                <span className="task-text dark:text-white">{task.text}</span>
+                            </div>
+
+                            <span className='taskCheckBox dark:text-white' onClick={(e) => handleToggleTaskImportant(e, task.id)}> {/* Add onClick handler */}
+                                {task.important ? <Star /> : <StarOff />}
+                            </span>
+                            {/* <span className="task-priority">{task.priority}</span> */}
+                        </li>
+                    ))}
+                </ul>
+                :
+                <div className="task-list flex flex-wrap gap-4 ">
+                    {filteredTasks.filter(task => task.completed).map((task) => (
+                        <div key={task.id} className="task-item w-1/4 py-16 flex justify-between items-center p-5 border border-[#496E4B33]" onClick={() => handleSelectedTaskId(task.id)}>
+                            <div className='flex gap-1'>
+                                <span className='taskCheckBox dark:text-white' onClick={(e) => handleToggleTaskCompletion(e, task.id)}> {/* Add onClick handler */}
+                                    {task.completed ? <SquareCheckBig /> : <Square />}
+                                </span>
+                                <span className="task-text dark:text-white">{task.text}</span>
+                            </div>
+
+                            <span className='taskCheckBox dark:text-white' onClick={(e) => handleToggleTaskImportant(e, task.id)}> {/* Add onClick handler */}
+                                {task.important ? <Star /> : <StarOff />}
+                            </span>
+                        </div>
+                    ))}
+                </div>}
 
 
         </div>

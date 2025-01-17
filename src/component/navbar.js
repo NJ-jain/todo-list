@@ -1,11 +1,14 @@
-import { LayoutGrid, Menu, MoonStar, Search, Sun } from 'lucide-react';
+import { LayoutGrid, List, Menu, MoonStar, Search, Sun } from 'lucide-react';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggle } from '../store/slice/asideSlice';
 import { toggleTheme } from '../store/slice/themeSlice';
+import { layout } from '../store/slice/taskSlice';
 
 const Navbar = () => {
     // const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const layoutValue = useSelector((state) => state.task.layout);
 
     const dispatch = useDispatch();
 
@@ -16,9 +19,12 @@ const Navbar = () => {
     const handleThemeToggle = () => {
         dispatch(toggleTheme());
     };
+    const handleLayout = () => {
+        if (layoutValue === "list") dispatch(layout("grid"))
+        else if (layoutValue === "grid") dispatch(layout("list"))
+    }
 
-  const darkMode = useSelector((state) => state.theme.darkMode);
-
+    const darkMode = useSelector((state) => state.theme.darkMode);
 
     return (
         <>
@@ -40,11 +46,11 @@ const Navbar = () => {
                             <li>
                                 <Search />
                             </li>
-                            <li>
-                                <LayoutGrid />
+                            <li onClick={handleLayout}>
+                                {layoutValue === "list" ? <LayoutGrid /> : <List /> }
                             </li>
                             <li onClick={handleThemeToggle} >
-                               {darkMode ? <Sun /> : <MoonStar />} 
+                                {darkMode ? <Sun /> : <MoonStar />}
                             </li>
                         </ul>
                     </div>
