@@ -1,7 +1,7 @@
 import { Bell, Calendar, CircleChevronDown, CircleChevronUp, Repeat, Square, SquareCheckBig, Star, StarOff } from 'lucide-react';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTask, taskInputBox, toggleTaskCompletion, toggleTaskImpportant,setSelectedTaskId, toggle } from '../store/slice/taskSlice';
+import { addTask, taskInputBox, toggleTaskCompletion, toggleTaskImpportant, setSelectedTaskId, toggle } from '../store/slice/taskSlice';
 
 const TaskList = () => {
 
@@ -18,10 +18,12 @@ const TaskList = () => {
         }
     };
 
-    const handleToggleTaskCompletion = (taskId) => {
+    const handleToggleTaskCompletion = (e, taskId) => {
+        e.stopPropagation()
         dispatch(toggleTaskCompletion(taskId)); // Dispatch the action to toggle task completion
     };
-    const handleToggleTaskImportant = (taskId) => {
+    const handleToggleTaskImportant = (e, taskId) => {
+        e.stopPropagation()
         dispatch(toggleTaskImpportant(taskId)); // Dispatch the action to toggle task completion
     };
     const handleTaskInputBox = () => {
@@ -29,16 +31,30 @@ const TaskList = () => {
     }
     const handleSelectedTaskId = (taskId) => {
         dispatch(setSelectedTaskId(taskId)); // Dispatch the action to toggle task completion
-        if(!showTaskSlider) dispatch(toggle())
+        if (!showTaskSlider) dispatch(toggle())
     };
+
+    const filter = useSelector((state) => state.task.filter); // Get the current filter from Redux
+
+    // Modify the tasks rendering logic based on the filter
+    const filteredTasks = Object.values(tasks).filter(task => {
+        if (filter === 'all') return true;
+        if (filter === 'important') return task.important;
+        if (filter === 'today') {
+            const today = new Date().setHours(0, 0, 0, 0);
+            const taskDate = new Date(task.id).setHours(0, 0, 0, 0); // Assuming task.id is the timestamp when the task was created
+            return taskDate === today;
+        }
+    });
+    
 
     const dispatch = useDispatch();
     return (
         <div className={`${showTaskSlider && showAside ? "w-3/5" : showTaskSlider || showAside ? "w-4/5" : "w-full"} flex flex-col gap-4 `}>
 
-            <div className="flex items-center gap-1 dark:text-white" onClick={handleTaskInputBox} > {/* Add a flex container for alignment */}
+            <div className="flex items-center gap-1 dark:text-white w-fit" onClick={handleTaskInputBox} > {/* Add a flex container for alignment */}
                 <span className='text-[#142E159E] dark:text-white' >To Do</span> {/* Wrap the text in a span for potential styling */}
-               {taskInput ? <CircleChevronDown  className='dark:text-white text-[#142E159E]' />:<CircleChevronUp   className='dark:text-white text-[#142E159E]'/>}
+                {taskInput ? <CircleChevronDown className='dark:text-white text-[#142E159E]' /> : <CircleChevronUp className='dark:text-white text-[#142E159E]' />}
             </div>
 
 
@@ -53,7 +69,7 @@ const TaskList = () => {
 
                 <div className='flex justify-between p-3 mt-auto '>
                     <div className='flex gap-4'>
-                        <Bell  className='dark:text-white text-[#142E159E]'/>
+                        <Bell className='dark:text-white text-[#142E159E]' />
                         <Repeat className='dark:text-white text-[#142E159E]' />
                         <Calendar className='dark:text-white text-[#142E159E]' />
                     </div>
@@ -63,16 +79,16 @@ const TaskList = () => {
             </div>}
 
             <ul className="task-list">
-                {Object.values(tasks).filter(task => !task.completed).map((task) => (
+                {filteredTasks.filter(task => !task.completed).map((task) => (
                     <li key={task.id} className="task-item flex justify-between items-center p-5 border border-[#496E4B33]" onClick={() => handleSelectedTaskId(task.id)}>
                         <div className='flex gap-2'>
-                            <span className='taskCheckBox dark:text-white' onClick={() => handleToggleTaskCompletion(task.id)}> {/* Add onClick handler */}
+                            <span className='taskCheckBox dark:text-white' onClick={(e) => handleToggleTaskCompletion(e, task.id)}> {/* Add onClick handler */}
                                 {task.completed ? <SquareCheckBig /> : <Square />}
                             </span>
                             <span className="task-text dark:text-white">{task.text}</span>
                         </div>
 
-                        <span className='taskCheckBox dark:text-white' onClick={() => handleToggleTaskImportant(task.id)}> {/* Add onClick handler */}
+                        <span className='taskCheckBox dark:text-white' onClick={(e) => handleToggleTaskImportant(e, task.id)}> {/* Add onClick handler */}
                             {task.important ? <Star /> : <StarOff />}
                         </span>
                         {/* <span className="task-priority">{task.priority}</span> */}
@@ -81,16 +97,16 @@ const TaskList = () => {
             </ul>
             <p className='w-fit dark:text-white'>Completed</p>
             <ul className="task-list">
-                {Object.values(tasks).filter(task => task.completed).map((task) => (
+                {filteredTasks.filter(task => task.completed).map((task) => (
                     <li key={task.id} className="task-item flex justify-between items-center p-5 border border-[#496E4B33]" onClick={() => handleSelectedTaskId(task.id)}>
                         <div className='flex gap-2 '>
-                            <span className='taskCheckBox dark:text-white ' onClick={() => handleToggleTaskCompletion(task.id)}> {/* Add onClick handler */}
+                            <span className='taskCheckBox dark:text-white ' onClick={(e) => handleToggleTaskCompletion(e, task.id)}> {/* Add onClick handler */}
                                 {task.completed ? <SquareCheckBig /> : <Square />}
                             </span>
                             <span className="task-text dark:text-white">{task.text}</span>
                         </div>
 
-                        <span className='taskCheckBox dark:text-white' onClick={() => handleToggleTaskImportant(task.id)}> {/* Add onClick handler */}
+                        <span className='taskCheckBox dark:text-white' onClick={(e) => handleToggleTaskImportant(e, task.id)}> {/* Add onClick handler */}
                             {task.important ? <Star /> : <StarOff />}
                         </span>
                         {/* <span className="task-priority">{task.priority}</span> */}

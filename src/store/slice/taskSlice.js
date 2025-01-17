@@ -38,10 +38,13 @@ export const taskSlice = createSlice({
     setSelectedTaskId: (state, action) => {
       state.taskId = action.payload;
     },
+    setFilter: (state, action) => {
+      state.filter = action.payload;
+    },
 
   },
 });
 
-export const { toggle, addTask, deleteTask, toggleTaskCompletion, toggleTaskImpportant,taskInputBox, setSelectedTaskId } = taskSlice.actions;
+export const { toggle, addTask, deleteTask, toggleTaskCompletion, toggleTaskImpportant,taskInputBox, setSelectedTaskId , setFilter} = taskSlice.actions;
 
 export default taskSlice.reducer;

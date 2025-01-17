@@ -1,7 +1,8 @@
 import { Calendar, Info, Plus, Route, School, SquareMenu, Star } from 'lucide-react'
 import React from 'react'
 import DoughnutChart from './donutChat'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setFilter } from '../store/slice/taskSlice';
 
 const ProfileImage = React.memo(() => (
     <div className='rounded-full w-32 h-32 relative overflow-hidden'>
@@ -10,8 +11,8 @@ const ProfileImage = React.memo(() => (
 ));
 
 const Aside = () => {
-
-
+    const dispatch = useDispatch(); // Make sure to import useDispatch from 'react-redux'
+    const currentFilter = useSelector((state) => state.task.filter); // Retrieve the current filter value from Redux state
     const isOpen = useSelector((state) => state.aside.isOpen); // Get the isOpen state from Redux
     if (!isOpen) return null;
     return (
@@ -23,25 +24,17 @@ const Aside = () => {
 
             <div className='flex flex-col gap-4 p-4 '>
                 <ul className='flex flex-col bg-white gap-2 py-2 dark:bg-[#232323]'>
-                    <li className='flex items-center dark:bg-transparent space-x-2  p-2 hover:bg-[#35793729] hover:rounded-lg hover:text-green-900 dark:hover:bg-[#35793729] dark:hover:text-[#98E19B]'> {/* Add flexbox styling */}
-                        <SquareMenu /> {/* Icon */}
-                        <span>All Tasks</span> {/* Name next to the icon */}
+                    <li onClick={() => dispatch(setFilter('all'))} className={`flex items-center dark:bg-transparent space-x-2 bg-white p-2 ${currentFilter === 'all' ? 'bg-[#35793729] rounded-lg text-green-900 dark:bg-[#35793729] dark:text-[#98E19B]' : 'hover:bg-[#35793729] hover:rounded-lg hover:text-green-900 dark:hover:bg-[#35793729] dark:hover:text-[#98E19B]'}`}>
+                        <SquareMenu />
+                        <span>All Tasks</span>
                     </li>
-                    <li className='flex items-center space-x-2 dark:bg-transparent bg-white p-2 hover:bg-[#35793729] hover:rounded-lg hover:text-green-900 dark:hover:bg-[#35793729] dark:hover:text-[#98E19B]'> {/* Add flexbox styling */}
-                        <Calendar /> {/* Icon */}
-                        <span>Today</span> {/* Name next to the icon */}
+                    <li onClick={() => dispatch(setFilter('important'))} className={`flex items-center dark:bg-transparent space-x-2 bg-white p-2 ${currentFilter === 'important' ? 'bg-[#35793729] rounded-lg text-green-900 dark:bg-[#35793729] dark:text-[#98E19B]' : 'hover:bg-[#35793729] hover:rounded-lg hover:text-green-900 dark:hover:bg-[#35793729] dark:hover:text-[#98E19B]'}`}>
+                        <Star />
+                        <span>Important</span>
                     </li>
-                    <li className='flex items-center dark:bg-transparent space-x-2 bg-white p-2 hover:bg-[#35793729] hover:rounded-lg hover:text-green-900 dark:hover:bg-[#35793729] dark:hover:text-[#98E19B]'> {/* Add flexbox styling */}
-                        <Star /> {/* Icon */}
-                        <span>Important</span> {/* Name next to the icon */}
-                    </li>
-                    <li className='flex items-center dark:bg-transparent space-x-2 bg-white p-2 hover:bg-[#35793729] hover:rounded-lg hover:text-green-900 dark:hover:bg-[#35793729] dark:hover:text-[#98E19B]'> {/* Add flexbox styling */}
-                        <Route />{/* Icon */}
-                        <span>Planned</span> {/* Name next to the icon */}
-                    </li>
-                    <li className='flex items-center dark:bg-transparent space-x-2 bg-white p-2 hover:bg-[#35793729] hover:rounded-lg hover:text-green-900 dark:hover:bg-[#35793729] dark:hover:text-[#98E19B]'> {/* Add flexbox styling */}
-                        <School />{/* Icon */}
-                        <span>Assigned to me </span> {/* Name next to the icon */}
+                    <li onClick={() => dispatch(setFilter('today'))} className={`flex items-center dark:bg-transparent space-x-2 bg-white p-2 ${currentFilter === 'today' ? 'bg-[#35793729] rounded-lg text-green-900 dark:bg-[#35793729] dark:text-[#98E19B]' : 'hover:bg-[#35793729] hover:rounded-lg hover:text-green-900 dark:hover:bg-[#35793729] dark:hover:text-[#98E19B]'}`}>
+                        <Calendar />
+                        <span>Today</span>
                     </li>
                 </ul>
 
