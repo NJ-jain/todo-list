@@ -53,7 +53,7 @@ const TaskList = () => {
 
     const dispatch = useDispatch();
     return (
-        <div className={`${showTaskSlider && showAside ? "w-3/5" : showTaskSlider || showAside ? "w-4/5" : "w-full"} flex flex-col gap-4 `}>
+        <div className={`${showTaskSlider && showAside ? "lg:w-3/5" : showTaskSlider || showAside ? "lg:w-4/5" : "lg:w-full"} flex flex-col gap-4 w-full `}>
 
             <div className="flex items-center gap-1 dark:text-white w-fit" onClick={handleTaskInputBox} > {/* Add a flex container for alignment */}
                 <span className='text-[#142E159E] dark:text-white' >To Do</span> {/* Wrap the text in a span for potential styling */}
@@ -94,7 +94,7 @@ const TaskList = () => {
 
                             <span className='taskCheckBox dark:text-white' onClick={(e) => handleToggleTaskImportant(e, task.id)}> {/* Add onClick handler */}
                                 {task.important ? <Star /> : <StarOff />}
-S                            </span>
+                            </span>
                             {/* <span className="task-priority">{task.priority}</span> */}
                         </li>
                     ))}
@@ -102,7 +102,7 @@ S                            </span>
                 :
                 <div className="task-list flex flex-wrap gap-4 ">
                     {filteredTasks.filter(task => !task.completed).map((task) => (
-                        <div key={task.id} className="task-item w-1/4 py-16 flex justify-between items-center p-5 border border-[#496E4B33]" onClick={() => handleSelectedTaskId(task.id)}>
+                        <div key={task.id} className="task-item lg:w-1/4 w-full sm:w-1/2 py-16 flex justify-between items-center p-5 border border-[#496E4B33]" onClick={() => handleSelectedTaskId(task.id)}>
                             <div className='flex gap-1'>
                                 <span className='taskCheckBox dark:text-white' onClick={(e) => handleToggleTaskCompletion(e, task.id)}> {/* Add onClick handler */}
                                     {task.completed ? <SquareCheckBig /> : <Square />}
@@ -116,8 +116,8 @@ S                            </span>
                         </div>
                     ))}
                 </div>}
-            {filteredTasks.filter(task => task.completed).length !== 0 &&  <p className='w-fit dark:text-white'>Completed</p>}
-           
+            {filteredTasks.filter(task => task.completed).length !== 0 && <p className='w-fit dark:text-white'>Completed</p>}
+
             {layoutValue === "list" ?
                 <ul className="task-list">
                     {filteredTasks.filter(task => task.completed).map((task) => (

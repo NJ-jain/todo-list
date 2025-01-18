@@ -1,7 +1,8 @@
-import { Calendar, Info, Plus, Route, School, SquareMenu, Star } from 'lucide-react'
-import React from 'react'
-import DoughnutChart from './donutChat'
+import { Calendar, Info, Plus, SquareMenu, Star } from 'lucide-react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import DoughnutChart from './donutChat';
+import { toggle } from '../store/slice/asideSlice';
 import { setFilter } from '../store/slice/taskSlice';
 
 const ProfileImage = React.memo(() => (
@@ -15,24 +16,34 @@ const Aside = () => {
     const currentFilter = useSelector((state) => state.task.filter); // Retrieve the current filter value from Redux state
     const isOpen = useSelector((state) => state.aside.isOpen); // Get the isOpen state from Redux
     if (!isOpen) return null;
+
+    const handleMobileClick = (filter) => {
+        dispatch(setFilter(filter));
+        // Assuming you're using a responsive design check to determine if it's mobile
+        if (window.innerWidth <= 768) {
+            dispatch(toggle()); // Dispatch the action to toggle the aside
+        }
+    };
+
+
     return (
-        <div className='w-1/5 bg-[#EEF6EF] flex-1 p-4 relative mt-28 pt-24 dark:bg-[#2C2C2C] dark:text-white'>
-            <div className='w-full flex flex-col items-center gap-2 -top-16 absolute justify-center'>
+        <div className='lg:w-1/5 bg-[#EEF6EF] lg:flex-1 lg:p-4 lg:relative lg:mt-28 lg:pt-24 dark:bg-[#2C2C2C] dark:text-white absolute w-full'>
+            <div className='w-full flex flex-col items-center gap-2 -top-16 lg:absolute justify-center'>
                 <ProfileImage />
                 <p>Hey, ABCD</p>
             </div>
 
             <div className='flex flex-col gap-4 p-4 '>
                 <ul className='flex flex-col bg-white gap-2 py-2 dark:bg-[#232323]'>
-                    <li onClick={() => dispatch(setFilter('all'))} className={`flex items-center dark:bg-transparent space-x-2 bg-white p-2 ${currentFilter === 'all' ? 'bg-[#35793729] rounded-lg text-green-900 dark:bg-[#35793729] dark:text-[#98E19B]' : 'hover:bg-[#35793729] hover:rounded-lg hover:text-green-900 dark:hover:bg-[#35793729] dark:hover:text-[#98E19B]'}`}>
+                    <li onClick={() => handleMobileClick('all')} className={`flex items-center dark:bg-transparent space-x-2 bg-white p-2 ${currentFilter === 'all' ? 'bg-[#35793729] rounded-lg text-green-900 dark:bg-[#35793729] dark:text-[#98E19B]' : 'hover:bg-[#35793729] hover:rounded-lg hover:text-green-900 dark:hover:bg-[#35793729] dark:hover:text-[#98E19B]'}`}>
                         <SquareMenu />
                         <span>All Tasks</span>
                     </li>
-                    <li onClick={() => dispatch(setFilter('important'))} className={`flex items-center dark:bg-transparent space-x-2 bg-white p-2 ${currentFilter === 'important' ? 'bg-[#35793729] rounded-lg text-green-900 dark:bg-[#35793729] dark:text-[#98E19B]' : 'hover:bg-[#35793729] hover:rounded-lg hover:text-green-900 dark:hover:bg-[#35793729] dark:hover:text-[#98E19B]'}`}>
+                    <li onClick={() => handleMobileClick('important')} className={`flex items-center dark:bg-transparent space-x-2 bg-white p-2 ${currentFilter === 'important' ? 'bg-[#35793729] rounded-lg text-green-900 dark:bg-[#35793729] dark:text-[#98E19B]' : 'hover:bg-[#35793729] hover:rounded-lg hover:text-green-900 dark:hover:bg-[#35793729] dark:hover:text-[#98E19B]'}`}>
                         <Star />
                         <span>Important</span>
                     </li>
-                    <li onClick={() => dispatch(setFilter('today'))} className={`flex items-center dark:bg-transparent space-x-2 bg-white p-2 ${currentFilter === 'today' ? 'bg-[#35793729] rounded-lg text-green-900 dark:bg-[#35793729] dark:text-[#98E19B]' : 'hover:bg-[#35793729] hover:rounded-lg hover:text-green-900 dark:hover:bg-[#35793729] dark:hover:text-[#98E19B]'}`}>
+                    <li onClick={() => handleMobileClick('today')} className={`flex items-center dark:bg-transparent space-x-2 bg-white p-2 ${currentFilter === 'today' ? 'bg-[#35793729] rounded-lg text-green-900 dark:bg-[#35793729] dark:text-[#98E19B]' : 'hover:bg-[#35793729] hover:rounded-lg hover:text-green-900 dark:hover:bg-[#35793729] dark:hover:text-[#98E19B]'}`}>
                         <Calendar />
                         <span>Today</span>
                     </li>

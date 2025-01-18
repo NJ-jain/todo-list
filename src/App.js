@@ -23,9 +23,9 @@ function App() {
   }, [darkMode]);
 
   return (
-    <div className="App flex flex-col min-h-screen px-4 dark:bg-[#242424]">
+    <div className="App flex flex-col h-screen px-4 dark:bg-[#242424] ">
       <Navbar />
-      <div className={`flex flex-1 w-full ${showTaskSlider && showAside ? "gap-4" : showTaskSlider || showAside ? "gap-8" : ""} `}>
+      <div className={`flex flex-1 w-full relative ${showTaskSlider && showAside ? "gap-4" : showTaskSlider || showAside ? "gap-8" : ""} overflow-hidden`}>
         <Aside />
         <TaskList />
         <TaskSlider />

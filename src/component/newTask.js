@@ -25,7 +25,7 @@ const TaskSlider = () => {
   }
 
   return (
-    <div className='w-1/5 flex-1  bg-[#EEF6EF] flex flex-col p-4 h-screen dark:bg-[#2c2c2c]  '>
+    <div className='lg:w-1/5 lg:flex-1  bg-[#EEF6EF] flex flex-col p-4 lg:h-screen h-full dark:bg-[#2c2c2c]  lg:relative absolute right-0 w-full'>
       <div className='flex flex-col' key={task.id} >
 
         <div className="task-item flex justify-between items-center p-5 border-t border-b border-[#496E4B33]" >
